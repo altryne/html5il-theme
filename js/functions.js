@@ -33,7 +33,7 @@ $(document).ready(function() {
 	    }
 	});
 	if(past_meetups && past_meetups.length){
-		var evt = past_meetups[0],
+		var evt = past_meetups[past_meetups.length-1],
 			parent = $("#meetup .past_event");
 
 		$('#meetup').addClass('past');

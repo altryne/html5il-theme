@@ -25,7 +25,7 @@
     </div>
         <?php if ($flag == 0) {
         $flag = 1;
-        $url = "https://api.meetup.com/2/events?key=597d711c1a263a1546671f5c1a67d42&sign=true&group_urlname=html5-il&page=1&status=past";
+        $url = "https://api.meetup.com/2/events?key=597d711c1a263a1546671f5c1a67d42&sign=true&group_urlname=html5-il&status=past";
         $url2 = "https://api.meetup.com/2/events?key=597d711c1a263a1546671f5c1a67d42&sign=true&group_urlname=html5-il&page=1&status=upcoming";
         $curl = curl_init($url);
         $curl2 = curl_init($url2);
