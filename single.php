@@ -33,5 +33,5 @@
 <!--			   <div class="post-next">--><?php //next_post_link('%link'); ?><!--</div>-->
 <!--        </div>      -->
 
-
+<!-- ### this is footer -->
 <?php get_footer(); ?>

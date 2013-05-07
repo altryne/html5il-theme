@@ -17,7 +17,11 @@
             } ?>
 
         <div class="gridly-copy"><h2><a href="<?php the_permalink() ?>"><?php the_title(); ?></a></h2>
-            <?php the_excerpt(); ?>
+            <?php 
+            /*the_excerpt(); */
+            $excerpt = strip_tags(get_the_excerpt());
+            echo $excerpt;
+            ?>
 
             <p class="gridly-date"><a href="<?php the_permalink() ?>"><?php the_time(get_option('date_format')); ?></a>
              </p>
@@ -55,10 +59,11 @@
         <?php }?>
     <?php endwhile; ?>
 </div>
+<hr>
 <?php else : ?>
 <?php endif; ?>
 
 <?php next_posts_link('<p class="view-older">View Older Entries</p>') ?>
 
-
+<!-- ### this is footer -->
 <?php get_footer(); ?>
