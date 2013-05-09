@@ -182,7 +182,7 @@ S.UI = (function () {
         break;
 
         case 'countdown':
-          value = parseInt(value) || 10;
+          value = parseInt(value) || 4;
           value = value > 0 ? value : 10;
 
           timedAction(function (index) {
