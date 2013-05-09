@@ -418,6 +418,14 @@ dd:before {
 	height: 98px;
 	padding: 0;
 	font-family: "Open Sans", arial;
+
+	background-repeat: no-repeat;
+	background-position: 50%;
+	background-image: url(images/ajax-loader.gif);
+}
+
+#meetup.past,#meetup.future{
+	background-image: none;
 }
 #meetup a:hover {
 	text-decoration: none;

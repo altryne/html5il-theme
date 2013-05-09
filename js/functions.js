@@ -32,41 +32,42 @@ $(document).ready(function() {
 	        yy: "<em>%d</em> years"
 	    }
 	});
-    past = $.getJSON('/wp-content/themes/gridly/get.php?type=past');
-    future = $.getJSON('/wp-content/themes/gridly/get.php?type=future');
+    var past = $.getJSON('/wp-content/themes/gridly/get.php?type=past');
+    var future = $.getJSON('/wp-content/themes/gridly/get.php?type=future');
 
-    $.when(past,future).then(function(past,future){
+    $.when(past, future).then(function (past, future) {
         console.log('got events from meetup API!');
-        past_meetups = past[0].results;
-        future_meetups = future[0].results;
-
-        if(past_meetups && past_meetups.length){
-        		var evt = past_meetups[past_meetups.length-1],
-        			parent = $("#meetup .past_event");
-
-        		$('#meetup').addClass('past');
-        		parent.find('time').html(moment(evt.time).fromNow());
-        		parent.find('h3 a').attr('href',evt.event_url);
-        	}
-        	if(future_meetups && future_meetups.length){
-        		var evt = future_meetups[0],
-        			parent = $("#meetup .next_event");
-
-        		$('#meetup').addClass('next');
-        		parent.find('time').html(moment(evt.time).fromNow());
-        		parent.find('h3 a').attr('href',evt.event_url);
-        		$('#join').attr('href',evt.event_url);
-
-        		var seatsLeft = evt.rsvp_limit-evt.yes_rsvp_count,
-        			seatsText = seatsLeft + ' seat' + (seatsLeft != 1 ? 's' : '') + ' left';
-        		parent.find('small').html(seatsText);
-        	}
-    })
+        var past_meetups = past[0].results;
+        var future_meetups = future[0].results;
 
 
-    window.setTimeout(function(){
+        if (past_meetups && past_meetups.length) {
+            var evt = past_meetups[past_meetups.length - 1],
+                parent = $("#meetup").find(".past_event");
+
+            $('#meetup').addClass('past');
+            parent.find('time').html(moment(evt.time).fromNow());
+            parent.find('h3 a').attr('href', evt.event_url);
+        }
+        if (future_meetups && future_meetups.length) {
+            var evt = future_meetups[0],
+                parent = $("#meetup").find(".next_event");
+
+            $('#meetup').addClass('next');
+            parent.find('time').html(moment(evt.time).fromNow());
+            parent.find('h3 a').attr('href', evt.event_url);
+            $('#join').attr('href', evt.event_url);
+
+            var seatsLeft = evt.rsvp_limit - evt.yes_rsvp_count,
+                seatsText = seatsLeft + ' seat' + (seatsLeft != 1 ? 's' : '') + ' left';
+            parent.find('small').html(seatsText);
+        }
+    });
+
+
+    window.setTimeout(function () {
         $('#post-grid').masonry('reload')
-    },1500)
+    }, 1500);
 
 	$('.preview').on('click',function(){
 	    id = $(this).data('youtube');
@@ -89,7 +90,7 @@ $(document).ready(function() {
 // hover code for index  templates
 $(document).ready(function() {
 	
-		$('#post-grid .image').hover(
+		$('#post-grid').find('.image').hover(
 			function() {
 				$(this).stop().fadeTo(300, 0.8);
 			},
@@ -105,18 +106,18 @@ $(document).ready(function() {
 
 // comment form values
 $(document).ready(function(){
-	$("#comment-form input").focus(function () {
+	$("#comment-form").find("input").focus(function () {
 		var origval = $(this).val();	
-		$(this).val("");	
+		$(this).val("");
 		//console.log(origval);
-		$("#comment-form input").blur(function () {
+		$("#comment-form").find("input").blur(function () {
 			if($(this).val().length === 0 ) {
 				$(this).val(origval);	
 				origval = null;
 			}else{
 				origval = null;
-			};	
-		});
+            }
+        });
 	});
 });
 
