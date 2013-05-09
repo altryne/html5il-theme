@@ -32,27 +32,37 @@ $(document).ready(function() {
 	        yy: "<em>%d</em> years"
 	    }
 	});
-	if(past_meetups && past_meetups.length){
-		var evt = past_meetups[past_meetups.length-1],
-			parent = $("#meetup .past_event");
+    past = $.getJSON('/wp-content/themes/gridly/get.php?type=past');
+    future = $.getJSON('/wp-content/themes/gridly/get.php?type=future');
 
-		$('#meetup').addClass('past');
-		parent.find('time').html(moment(evt.time).fromNow());
-		parent.find('h3 a').attr('href',evt.event_url);
-	}
-	if(future_meetups && future_meetups.length){
-		var evt = future_meetups[0],
-			parent = $("#meetup .next_event");
+    $.when(past,future).then(function(past,future){
+        console.log('got events from meetup API!');
+        past_meetups = past[0].results;
+        future_meetups = future[0].results;
 
-		$('#meetup').addClass('next');
-		parent.find('time').html(moment(evt.time).fromNow());
-		parent.find('h3 a').attr('href',evt.event_url);
-		$('#join').attr('href',evt.event_url);
+        if(past_meetups && past_meetups.length){
+        		var evt = past_meetups[past_meetups.length-1],
+        			parent = $("#meetup .past_event");
 
-		var seatsLeft = evt.rsvp_limit-evt.yes_rsvp_count,
-			seatsText = seatsLeft + ' seat' + (seatsLeft != 1 ? 's' : '') + ' left';
-		parent.find('small').html(seatsText);
-	}
+        		$('#meetup').addClass('past');
+        		parent.find('time').html(moment(evt.time).fromNow());
+        		parent.find('h3 a').attr('href',evt.event_url);
+        	}
+        	if(future_meetups && future_meetups.length){
+        		var evt = future_meetups[0],
+        			parent = $("#meetup .next_event");
+
+        		$('#meetup').addClass('next');
+        		parent.find('time').html(moment(evt.time).fromNow());
+        		parent.find('h3 a').attr('href',evt.event_url);
+        		$('#join').attr('href',evt.event_url);
+
+        		var seatsLeft = evt.rsvp_limit-evt.yes_rsvp_count,
+        			seatsText = seatsLeft + ' seat' + (seatsLeft != 1 ? 's' : '') + ' left';
+        		parent.find('small').html(seatsText);
+        	}
+    })
+
 
     window.setTimeout(function(){
         $('#post-grid').masonry('reload')

@@ -29,21 +29,7 @@
     </div>
         <?php if ($flag == 0) {
         $flag = 1;
-        $url = "https://api.meetup.com/2/events?key=597d711c1a263a1546671f5c1a67d42&sign=true&group_urlname=html5-il&status=past";
-        $url2 = "https://api.meetup.com/2/events?key=597d711c1a263a1546671f5c1a67d42&sign=true&group_urlname=html5-il&page=1&status=upcoming";
-        $curl = curl_init($url);
-        $curl2 = curl_init($url2);
-        curl_setopt($curl,CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($curl2,CURLOPT_RETURNTRANSFER, 1);
-        $return = curl_exec($curl);
-        $return2 = curl_exec($curl2);
-        curl_close($curl);
-        curl_close($curl2);
         ?>
-        <script>
-            past_meetups = <?= $return ?>.results;
-            future_meetups = <?= $return2 ?>.results;
-        </script>
             <div class="grid-item" id="meetup">
                 <div class="past_event">
                     <h3><a href="#" target="_blank">Last meetup</a></h3>
